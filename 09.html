@@ -1,0 +1,207 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pakistan Live TV</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #121212;
+            color: white;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        header {
+            width: 100%;
+            padding: 15px;
+            background: #ff4500;
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        /* 📜 Floating News Bar */
+        .news-bar {
+            width: 100%;
+            background: #222;
+            color: #ffcc00;
+            padding: 10px;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .news-text {
+            display: inline-block;
+            animation: marquee 10s linear infinite;
+        }
+
+        @keyframes marquee {
+            from { transform: translateX(100%); }
+            to { transform: translateX(-100%); }
+        }
+
+        /* 🎥 Video Player */
+        .player-container {
+            width: 100%;
+            max-width: 700px;
+            margin-top: 10px;
+        }
+
+        video {
+            width: 100%;
+            border-radius: 10px;
+            background: black;
+        }
+
+        /* 📡 Scrollable Channel Grid */
+        .channels-wrapper {
+            width: 100%;
+            max-width: 700px;
+            height: 270px;
+            overflow-y: auto;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        .channels-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            padding-bottom: 10px;
+        }
+
+        .channel-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .channel-btn {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, #ff4500, #ffcc00);
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.3s ease-in-out;
+            box-shadow: 0px 0px 8px rgba(255, 204, 0, 0.6);
+            background-size: cover;
+            background-position: center;
+        }
+
+        .channel-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.9);
+        }
+
+        .channel-name {
+            margin-top: 5px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>📺 Pakistan Live TV</header>
+
+    <!-- 📜 Floating News Bar -->
+    <div class="news-bar">
+        <span class="news-text">🔥 Breaking News: Pak vs Nz First Match tri Serias 2pm today | More channels coming soon! 🔥</span>
+    </div>
+
+    <!-- 🎥 Video Player -->
+    <div class="player-container">
+        <video id="videoPlayer" controls autoplay>
+            <source id="videoSource" src="https://cdn22lhr.tamashaweb.com:8087/jazzauth/geoNews-abr/playlist.m3u8" type="application/x-mpegURL">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <!-- 📡 Scrollable Channel Grid -->
+    <div class="channels-wrapper">
+        <div class="channels-container">
+            <div class="channel-item">
+                <button class="channel-btn" onclick="playChannel('https://cdn18lhr.tamashaweb.com:8087/jazzauth/Trination-abr/playlist.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9Mi84LzIwMjUgNDozODoyNiBBTSZoYXNoX3ZhbHVlPW04UGhEbFFGMjVKQTRJTEpWMXVoV0E9PSZ2YWxpZG1pbnV0ZXM9MTA=', 'ten sport')" style="background-image: url('logos/Tri nation.png');"></button>
+                <span class="channel-name">Tri Nation Match</span>
+            </div>
+
+            <div class="channel-item">
+                <button class="channel-btn" onclick="playChannel('https://cdn22lhr.tamashaweb.com:8087/jazzauth/geoNews-abr/playlist.m3u8', 'Geo')" style="background-image: url('logos/geo.png');"></button>
+                <span class="channel-name">Geo News</span>
+            </div>
+
+            <div class="channel-item">
+                <button class="channel-btn" onclick="playChannel('https://cdn24lhr.tamashaweb.com:8087/jazzauth/ARYnews-abr/playlist.m3u8', 'ARY')" style="background-image: url('logos/ary.png');"></button>
+                <span class="channel-name">ARY News</span>
+            </div>
+
+            <div class="channel-item">
+                <button class="channel-btn" onclick="playChannel('https://cdn22lhr.tamashaweb.com:8087/jazzauth/expressnews-abr/playlist.m3u8', 'Express')" style="background-image: url('logos/express.png');"></button>
+                <span class="channel-name">Express News</span>
+            </div>
+
+            <div class="channel-item">
+                <button class="channel-btn" onclick="playChannel('https://cdn22lhr.tamashaweb.com:8087/jazzauth/samaaTV-abr/playlist.m3u8', 'Samaa')" style="background-image: url('logos/samaa.png');"></button>
+                <span class="channel-name">Samaa TV</span>
+            </div>
+
+            <div class="channel-item">
+                <button class="channel-btn" onclick="playChannel('https://cdn12isb.tamashaweb.com:8087/jazzauth/humnews-abr/playlist.m3u8', 'Hum')" style="background-image: url('logos/hum.png');"></button>
+                <span class="channel-name">Hum News</span>
+            </div>
+
+            <div class="channel-item">
+                <button class="channel-btn" onclick="playChannel('https://imob.dunyanews.tv/livehd/_definst_/ngrp:dunyalivehd_2_all/playlist.m3u8', 'Dunya')" style="background-image: url('logos/dunya.png');"></button>
+                <span class="channel-name">Dunya News</span>
+            </div>
+
+            <div class="channel-item">
+                <button class="channel-btn" onclick="playChannel('https://d4.dunyapurkaraja.com:999/hls/asportshd.m3u8?md5=RIcAomVR_fzXeQ8Ake3loQ&expires=1739022054', 'Ary sport')" style="background-image: url('logos/Ary sport.png');"></button>
+                <span class="channel-name">Ary Sport</span>
+            </div>
+
+            <div class="channel-item">
+                <button class="channel-btn" onclick="playChannel('https://cdn12isb.tamashaweb.com:8087/jazzauth/bolnews-abr/playlist.m3u8', 'Bol')" style="background-image: url('logos/bol.png');"></button>
+                <span class="channel-name">Bol News</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function playChannel(url, channelName) {
+            let videoPlayer = document.getElementById('videoPlayer');
+            let videoSource = document.getElementById('videoSource');
+
+            videoSource.src = url;
+            videoPlayer.load();
+            videoPlayer.play();
+
+            document.title = channelName + " - Pakistan Live TV";
+        }
+    </script>
+
+</body>
+</html>
